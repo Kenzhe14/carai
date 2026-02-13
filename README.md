@@ -3,6 +3,6 @@
 
 pip install -r requirements.txt
 
-python main.py
+uvicorn main:app --reload
 
-python streamlit_app.py
+streamlit run streamlit_app.py

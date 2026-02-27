@@ -1,5 +1,9 @@
+# Backend
 fastapi
 uvicorn
 python-multipart
-ultralytics
+ultralytics-cpu  # Специальная легкая версия без CUDA
+# Frontend
+streamlit
+requests
 Pillow

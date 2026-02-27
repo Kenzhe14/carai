@@ -1,18 +1,24 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
 from PIL import Image
 import io
 
-app = FastAPI(title="Car Damage Detection API")
+app = FastAPI()
 
+# РАЗРЕШАЕМ CORS (Важно для связи фронтенда и бэкенда)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # 1. ЗАГРУЗКА МОДЕЛИ
 # Мы загружаем модель один раз при старте сервера, чтобы не тратить время на каждом запросе.
 try:
     model = YOLO("best.pt")
-    print("Модель успешно загружена!")
-except Exception as e:
-    print(f"Ошибка загрузки модели: {e}")
+except Exception:
+    model = YOLO("yolov8n.pt") # Резервный вариант
     # Если best.pt нет, можно загрузить стандартную для теста:
     # model = YOLO("yolov8n.pt") 
 

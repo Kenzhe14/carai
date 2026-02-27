@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
-from PIL import Image, ImageDraw
-import io
+import os
+
+# Берем URL из переменной окружения или используем локальный
+API_URL = os.getenv("API_URL", "http://localhost:8000/predict")
 
 st.set_page_config(page_title="Car Damage Detector", layout="centered")
 
